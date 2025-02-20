@@ -1,0 +1,7 @@
+{"class": "Animal", "name": "Сторож Петрович", "age": 100}
+{"class": "Bird", "name": "просто Петух", "age": 1}
+{"class": "Reptile", "name": "Аллигатор Геннадий", "age": 20}
+{"class": "Bird", "name": "Павлин Мавлин", "age": 4}
+{"class": "Reptile", "name": "Варан Абрам Генрихович", "age": 31}
+{"class": "Mammal", "name": "Баран Людовиг", "age": 4}
+{"class": "Mammal", "name": "Борька", "age": 4}
