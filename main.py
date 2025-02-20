@@ -4,14 +4,18 @@ import csv
 class Animal:
     _my_zoo = []
 
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-        Animal._my_zoo.append(self)
-
     @classmethod
     def fn(cls, name):  # найти тварь по имени
         return next((animal for animal in cls._my_zoo if animal.name == name), None)
+
+    def __init__(self, name, age):
+        if self.fn(name):
+            print(f"Тварь с именем {name} уже есть в зоопарке.")
+        else:
+            self.name = name
+            self.age = age
+            Animal._my_zoo.append(self)
+
 
     @classmethod
     def view_zoo(cls):
