@@ -49,7 +49,6 @@ class Animal:
 
         # Формируем имя файла
         file_path = f"{file_data}.{file_type.lower()}"
-
         try:
             # Открываем файл в режиме записи с соответствующей кодировкой
             with open(file_path, "w", encoding='utf-8') as file:
@@ -117,7 +116,7 @@ class Animal:
                 class_name = entry['class']
                 if class_name in globals():
                     obj_class = globals()[class_name]
-                    obj = obj_class(name=entry['name'], age=entry['age'])
+                    obj_class(name=entry['name'], age=entry['age'])
                     # cls._my_zoo.append(obj)
                 else:
                     print(f"Ошибка: Класс {class_name} не найден.")
@@ -153,9 +152,20 @@ class Animal:
 
 
 class Persons:
+    _instances = {}
+
+    def __new__(cls, name, *args, **kwargs):
+        # Проверяем, существует ли уже экземпляр с таким же именем
+        if name in cls._instances:
+            print(f"Ошибка: Экземпляр с именем '{name}' уже существует.")
+            return cls._instances[name]
+
+        # Создаем новый экземпляр
+        instance = super(Persons, cls).__new__(cls)
+        cls._instances[name] = instance
+        return instance
     def __init__(self, name):
         self.name = name
-
 
 class ZooKeeper(Persons):
     def feed_animal(self, animal_name):
@@ -216,6 +226,8 @@ print(toro.__dict__, toro.__class__.__name__)
 zoopark = None
 
 vt = Veterinarian("Пилюлькин")
+vt2 = Veterinarian("Пилюлькин")
+print(id(vt), id(vt2))
 hunter = Hanter("Иван Охотник")
 hunter.slaughter_animal('Овца Надя')
 Animal.view_zoo()
